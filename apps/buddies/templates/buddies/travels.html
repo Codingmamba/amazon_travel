@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style media="screen">
+      body {
+        margin-left: 30px;
+      }
+      h3 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div align="center">
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <h1>Hello, {{ request.session.user_name }}!</h1>
+
+    <br>
+    <br>
+
+    <h5>Your Trip Schedules</h5>
+
+    <div class="row col-md-8">
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Destination</th>
+        <th scope="col">Travel Start Date</th>
+        <th scope="col">Travel End Date</th>
+        <th scope="col">Plan</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+
+      {% for mine in mines %}
+  <tr>
+    <td><a href="{% url 'trip_display' id=mine.id %}">{{ mine.destination }}</a></td>
+    <td>{{mine.travel_from}}</td>
+    <td>{{mine.travel_to}}</td>
+    <td>{{mine.description}}</td>
+
+    <td><a href=""></a></td>
+    {% endfor %}
+
+      {% for trip in trips %}
+  <tr>
+    <td><a href="{% url 'trip_display' id=trip.id %}">{{ trip.destination }}</a></td>
+    <td>{{trip.travel_from}}</td>
+    <td>{{trip.travel_to}}</td>
+    <td>{{trip.description}}</td>
+
+    <td><a href=""></a></td>
+    {% endfor %}
+
+
+    </table>
+
+  </div>
+
+  <br>
+
+  <h5>Other Users Wish List:</h5>
+
+  <div class="row col-md-8">
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Travel Start Date</th>
+      <th scope="col">Travel End Date</th>
+      <th scope="col">Do You Want to Join?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    {% for other in others %}
+
+  <tr>
+  <td>{{ other.uploader.name }}</td>
+  <td><a href="{% url 'trip_display' id=other.id %}">{{ other.destination }}</a></td>
+  <td>{{ other.travel_from }}</td>
+  <td>{{ other.travel_to }}</td>
+  <td><a href="{% url 'joinTrip' id=other.id %}">Join</a></td>
+    {% endfor %}
+  </table>
+
+
+  </div>
+
+  <br>
+
+
+    <a href="/travels/add" class="btn btn-warning">Add Travel Plan</a>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+  </body>
+</html>
