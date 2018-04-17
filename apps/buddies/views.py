@@ -96,7 +96,7 @@ def newTripSubmit(request):
         return redirect('/travels')
 
 
-
+# Displaying results from the trip when they are selected
 def tripDisplay(request, id):
     context = {
         "dest": Trip.objects.get(id = id),
@@ -105,6 +105,7 @@ def tripDisplay(request, id):
     return render(request, 'buddies/trip_display.html', context)
 
 
+# When the users selectes 'Join'
 def joinTrip(request, id):
     trip = Trip.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
